@@ -1,8 +1,9 @@
 // Imports
 import express from 'express';
 import dotenv from 'dotenv';
-import GlobalErr from './middleware/globalError.mjs';
-import log from './middleware/loggingMiddleware.mjs';
+import cors from 'cors';
+import { log, globalErr } from './middleware/middleware.mjs';
+import connectDB from './db/conn.mjs';
 
 // Setup
 dotenv.config();
@@ -11,11 +12,16 @@ const PORT = process.env.PORT || 3001;
 
 // Middleware
 app.use(log);
+app.use(express.json());
+app.use(cors);
+
+// DB connection
+connectDB();
 
 // Routes
 
 // Global err handling
-app.use(GlobalErr);
+app.use(globalErr);
 
 // Listening
 app.listen(PORT, ()=>{
