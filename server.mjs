@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { log, globalErr } from './middleware/middleware.mjs';
 import connectDB from './db/conn.mjs';
+import saleRoutes from './routes/saleRoutes.mjs';
 
 // Setup
 dotenv.config();
@@ -19,6 +20,9 @@ app.use(cors);
 connectDB();
 
 // Routes
+app.use("/api/sale", saleRoutes);
+//app.use("/api/user", userRoutes);
+
 
 // Global err handling
 app.use(globalErr);
