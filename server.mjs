@@ -1,10 +1,10 @@
 // Imports
-import express from 'express';
-import dotenv from 'dotenv';
-import cors from 'cors';
-import { log, globalErr } from './middleware/middleware.mjs';
-import connectDB from './db/conn.mjs';
-import saleRoutes from './routes/saleRoutes.mjs';
+import express from "express";
+import dotenv from "dotenv";
+import cors from "cors";
+import { log, globalErr } from "./middleware/middleware.mjs";
+import connectDB from "./db/conn.mjs";
+import saleRoutes from "./routes/saleRoutes.mjs";
 
 // Setup
 dotenv.config();
@@ -23,11 +23,11 @@ connectDB();
 app.use("/api/sale", saleRoutes);
 //app.use("/api/user", userRoutes);
 
-
 // Global err handling
 app.use(globalErr);
 
 // Listening
-app.listen(PORT, ()=>{
-    console.log(`Server running on Port: ${PORT}`);
-})
+app.listen(PORT, () => {
+  console.log(`Server running on Port: ${PORT}`);
+});
+

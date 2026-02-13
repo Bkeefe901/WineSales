@@ -1,5 +1,4 @@
 import { Router } from "express";
-import Sale from "../models/saleSchema.mjs";
 import saleCTRL from "../controllers/saleController.mjs";
 
 const router = Router();
