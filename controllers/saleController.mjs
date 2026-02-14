@@ -2,7 +2,7 @@ import Sale from "../models/saleSchema.mjs";
 
 const getAllSales = async (req, res) => {
   try {
-    const {} = await Sale.find({});
+    const allSales = await Sale.find({});
     res.json(allSales);
   } catch (err) {
     console.error(err.message);
