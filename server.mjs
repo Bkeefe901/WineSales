@@ -20,7 +20,7 @@ connectDB();
 // Middleware
 app.use(log);
 app.use(express.json());
-//app.use(cors); // turned off because it wasn't allowing requests locally
+app.use(cors()); 
 
 
 // Routes
