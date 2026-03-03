@@ -1,5 +1,5 @@
-export const globalErr = (err, _req, _res, _next)=>{
-    console.status(400).error(`❌ Error - ${err.message}`);
+export const globalErr = (err, _req, res, _next)=>{
+    res.status(400).error(`❌ Error - ${err.message}`);
 };
 
 export const log = (req, _res, next) => {
