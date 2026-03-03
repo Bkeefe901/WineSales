@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 3001;
 // Middleware
 app.use(log);
 app.use(express.json());
-app.use(cors);
+//app.use(cors);    // turned off because it wasn't allowing requests locally
 
 // DB connection
 connectDB();

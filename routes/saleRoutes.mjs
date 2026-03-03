@@ -3,8 +3,7 @@ import saleCTRL from "../controllers/saleController.mjs";
 
 const router = Router();
 
-router
-  .route("/")
+router.route("/")
   // @route: GET api/sale
   // @desc: Get all sales
   // @access: Public
@@ -15,8 +14,7 @@ router
   // @access: Public
   .post(saleCTRL.createNewSale);
 
-router
-  .route("/:id")
+router.route("/:id")
   // @route: GET api/sale/:id
   // @desc: GET sale by id
   // @access: Public

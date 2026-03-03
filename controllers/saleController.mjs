@@ -16,7 +16,7 @@ const createNewSale = async (req, res) => {
 
     if (!shopName || !total) {
       return res.status(400).json({
-        msg: `The fields: saleDate, shopeName, and total are
+        msg: `The fields: shopeName, and total are
             required`,
       });
     }
@@ -25,7 +25,7 @@ const createNewSale = async (req, res) => {
       saleDate,
       shopName,
       total,
-      wines,
+      wines
     });
 
     res.status(201).json(sale);
@@ -37,7 +37,7 @@ const createNewSale = async (req, res) => {
 
 const getSaleById = async (req, res) => {
   try {
-    const id = req.param.id;
+    const id = req.params.id;
     const sale = await Sale.findById(id);
     res.json(sale);
   } catch (err) {
@@ -48,7 +48,7 @@ const getSaleById = async (req, res) => {
 
 const updateSale = async (req, res) => {
   try {
-    const id = req.param.id;
+    const id = req.params.id;
     const updatedSale = await Sale.findOneAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
@@ -66,7 +66,7 @@ const updateSale = async (req, res) => {
 
 const deleteSale = async (req, res) => {
   try {
-    const id = req.param.id;
+    const id = req.params.id;
     const deletedSale = await Sale.findByIdAndDelete(id);
     res.json({ msg: `Sale deleted: `, deletedSale });
   } catch (err) {
