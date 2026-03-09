@@ -30,10 +30,6 @@ const saleSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    wines: {
-      type: [String],
-      lowercase: true,
-    },
   },
   { timestamps: true },
 );

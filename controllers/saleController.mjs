@@ -61,7 +61,7 @@ const createNewSale = async (req, res) => {
 const updateSale = async (req, res) => {
   try {
     const id = req.params.id;
-    const updatedSale = await Sale.findOneAndUpdate(id, req.body, {
+    const updatedSale = await Sale.findByIdAndUpdate(id, req.body, {
       new: true,
       runValidators: true,
     });
