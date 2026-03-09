@@ -15,7 +15,7 @@ const saleSchema = new mongoose.Schema(
     },
     invoiceId: {
       type: String,
-      required: true,
+      default: '-',
     },
     saleDate: {
       type: Date,

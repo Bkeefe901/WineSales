@@ -18,9 +18,9 @@ const createNewSale = async (req, res) => {
   try {
     const { user, invoiceId, saleDate, shopName, total, wines } = req.body;
 
-    if (!shopName || !total || !user || !invoiceId) {
+    if (!shopName || !total || !user) {
       return res.status(400).json({
-        msg: `The fields: user (userId), invoiceId, shopeName, and total are
+        msg: `The fields: user (userId), shopeName, and total are
             required`,
       });
     }
