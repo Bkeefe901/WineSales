@@ -27,7 +27,13 @@ const invoiceCTRL = {
             },
             {
               type: "text",
-              text: `This PDF may contain one or more invoices, one per page. Extract each invoice and return ONLY a valid JSON array, one object per invoice:
+              text: `This PDF contains one or more invoices, one per page. For each page extract the following fields and return ONLY a valid JSON array with no explanation or markdown:
+
+- "invoiceId": the Invoice Number field
+- "saleDate": the Invoice Date field, converted to YYYY-MM-DD format
+- "shopName": the first line of the Billing Address (the company or customer name)
+- "total": the Total field as a plain number with no currency symbol
+
 [
   {
     "invoiceId": string or null,
@@ -35,8 +41,7 @@ const invoiceCTRL = {
     "shopName": string or null,
     "total": number or null
   }
-]
-No explanation, no markdown, just the JSON array.`,
+]`,
             },
           ],
         },
@@ -44,7 +49,14 @@ No explanation, no markdown, just the JSON array.`,
     });
 
     const text = response.content[0].text.trim();
-    const parsed = JSON.parse(text);
+
+    let parsed;
+    try {
+      parsed = JSON.parse(text);
+    } catch {
+      console.error("Claude response was not valid JSON:", text);
+      return res.status(500).json({ msg: "Failed to parse Claude response", raw: text });
+    }
 
     res.json(parsed);
   },
