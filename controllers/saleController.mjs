@@ -18,6 +18,14 @@ const createNewSale = async (req, res) => {
   try {
     const { user, invoiceId, saleDate, shopName, total, wines } = req.body;
 
+    const existingSale = await User.findOne({ invoiceId: invoiceId });
+
+    if (invoiceId !== '' && existingSale) {
+      return res.status(400).json({
+        msg: `A sale with the invoiceID: ${invoiceId}, already exists`
+      });
+    }
+
     if (!shopName || !total || !user) {
       return res.status(400).json({
         msg: `The fields: user (userId), shopeName, and total are
