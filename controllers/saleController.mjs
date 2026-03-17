@@ -18,11 +18,11 @@ const createNewSale = async (req, res) => {
   try {
     const { user, invoiceId, saleDate, shopName, total, wines } = req.body;
 
-    const existingSale = await User.findOne({ invoiceId: invoiceId });
+    const existingSale = await Sale.findOne({ invoiceId: invoiceId });
 
-    if (invoiceId !== '' && existingSale) {
+    if (invoiceId !== "" && existingSale) {
       return res.status(400).json({
-        msg: `A sale with the invoiceID: ${invoiceId}, already exists`
+        msg: `A sale with the invoiceID: ${invoiceId}, already exists`,
       });
     }
 
@@ -35,8 +35,10 @@ const createNewSale = async (req, res) => {
 
     const existingUser = await User.findOne({ _id: user });
 
-    if(!existingUser){
-      return res.status(400).json({ msg: `No user exists with the ID: ${user}`});
+    if (!existingUser) {
+      return res
+        .status(400)
+        .json({ msg: `No user exists with the ID: ${user}` });
     }
 
     const sale = await Sale.create({
@@ -45,10 +47,10 @@ const createNewSale = async (req, res) => {
       saleDate,
       shopName,
       total,
-      wines
+      wines,
     });
 
-    res.json({ msg: "New Sale Created: ", sale});
+    res.json({ msg: "New Sale Created: ", sale });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: err.message });
@@ -77,7 +79,7 @@ const updateSale = async (req, res) => {
     if (!updatedSale) {
       return res.status(404).json({ msg: "Sale not found" });
     }
-    res.json({ msg: `Sale was updated: `, updatedSale});
+    res.json({ msg: `Sale was updated: `, updatedSale });
   } catch (err) {
     console.error(err.message);
     res.status(500).json({ msg: err.message });
@@ -89,8 +91,8 @@ const deleteSale = async (req, res) => {
     const id = req.params.id;
     const deletedSale = await Sale.findByIdAndDelete(id);
 
-    if(!deletedSale){
-      res.status(404).json({ msg: `The sale with id: ${id}, does not exist`})
+    if (!deletedSale) {
+      res.status(404).json({ msg: `The sale with id: ${id}, does not exist` });
     }
 
     res.json({ msg: `Sale succesfully deleted: `, deletedSale });
@@ -104,6 +106,6 @@ export default {
   createNewSale,
   getAllSales,
   updateSale,
-//getSaleById,
+  //getSaleById,
   deleteSale,
 };
