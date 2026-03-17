@@ -12,7 +12,7 @@ const invoiceCTRL = {
 
     const response = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
-      max_tokens: 512,
+      max_tokens: 2048,
       messages: [
         {
           role: "user",
@@ -27,14 +27,16 @@ const invoiceCTRL = {
             },
             {
               type: "text",
-              text: `Extract invoice details and return ONLY a valid JSON object with these fields:
-{
-  "invoiceId": string or null,
-  "saleDate": "YYYY-MM-DD" or null,
-  "shopName": string or null,
-  "total": number or null
-}
-No explanation, no markdown, just the JSON object.`,
+              text: `This PDF may contain one or more invoices, one per page. Extract each invoice and return ONLY a valid JSON array, one object per invoice:
+[
+  {
+    "invoiceId": string or null,
+    "saleDate": "YYYY-MM-DD" or null,
+    "shopName": string or null,
+    "total": number or null
+  }
+]
+No explanation, no markdown, just the JSON array.`,
             },
           ],
         },
