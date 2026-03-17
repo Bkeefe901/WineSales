@@ -48,7 +48,7 @@ const invoiceCTRL = {
       ],
     });
 
-    const text = response.content[0].text.trim();
+    const text = response.content[0].text.trim().replace(/^```json\s*/i, "").replace(/\s*```$/, "");
 
     let parsed;
     try {
