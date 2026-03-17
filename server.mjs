@@ -7,6 +7,7 @@ import connectDB from "./db/conn.mjs";
 import userRoutes from "./routes/userRoutes.mjs";
 import authRoutes from "./routes/authRoutes.mjs";
 import saleRoutes from "./routes/saleRoutes.mjs";
+import invoiceRoutes from "./routes/invoiceRoutes.mjs";
 
 
 // Setup
@@ -27,6 +28,7 @@ app.use(cors());
 app.use("/api/user", userRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/sale", saleRoutes);
+app.use("/api/invoice", invoiceRoutes);
 
 // Global err handling
 app.use(globalErr);
