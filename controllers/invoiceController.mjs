@@ -9,6 +9,7 @@ const invoiceCTRL = {
     }
 
     const base64PDF = req.file.buffer.toString("base64");
+    const initials = req.body.initials || "TK";
 
     const response = await anthropic.messages.create({
       model: "claude-haiku-4-5-20251001",
@@ -27,7 +28,7 @@ const invoiceCTRL = {
             },
             {
               type: "text",
-              text: `This PDF contains one or more invoices, one per page. Only extract invoices where the PO Number field is exactly "TK" — skip any page where it is not. For each qualifying page extract the following fields and return ONLY a valid JSON array with no explanation or markdown:
+              text: `This PDF contains one or more invoices, one per page. Only extract invoices where the PO Number field is exactly "${initials}" — skip any page where it is not. For each qualifying page extract the following fields and return ONLY a valid JSON array with no explanation or markdown:
 
 - "invoiceId": the Invoice Number field
 - "saleDate": the Invoice Date field, converted to YYYY-MM-DD format
